@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    depends_on:
+      - redis
+    environment:
+      - RAGFLOW_API_KEY=ragflow-IxZjFiZWZlYzEyMjExZWZhZjY2MDI0Mm
+      - RAGFLOW_BASE_URL=http://192.168.1.39:9380
+      - AGENT_NAME=ACRES Assistant
+      - REDIS_URL=redis://redis:6379
+    networks:
+      - reflex_chat_network
+
+  frontend:
+    build:
+      dockerfile: web.Dockerfile
+    ports:
+      - 3000:80
+    depends_on:
+      - backend
+    networks:
+      - reflex_chat_network
+
+  redis:
+    image: redis
+    networks:
+        - reflex_chat_network
+
+networks:
+  reflex_chat_network:
+    driver: bridge 
