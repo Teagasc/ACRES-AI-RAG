@@ -9,12 +9,15 @@ services:
     depends_on:
       - redis
     environment:
-      - RAGFLOW_API_KEY=ragflow-IxZjFiZWZlYzEyMjExZWZhZjY2MDI0Mm
-      - RAGFLOW_BASE_URL=http://192.168.1.39:9380
-      - AGENT_NAME=ACRES Assistant
+      - RAGFLOW_API_KEY=ragflow-ViN2QxODljZDI3MjExZWY5MTk3MDI0Mm
+      - RAGFLOW_BASE_URL=http://hcux402.teagasc.net:9380
+      - AGENT_NAME=ACRES
       - REDIS_URL=redis://redis:6379
     networks:
       - reflex_chat_network
+    volumes:
+       - /opt/ACRES-AI-RAG/certs/hcux402.teagasc.net.pem:/etc/nginx/hcux402.teagasc.net.pem
+       - /opt/ACRES-AI-RAG/certs/hcux402.teagasc.net.key:/etc/nginx/hcux402.teagasc.net.key
 
   frontend:
     build:
